@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { NotificationIcon } from './components/Icons';
 import Logo from './components/Logo';
 import Course from './components/Course';
+import Menu from './components/Menu';
 
 const Container = styled.View`
   flex: 1;
@@ -152,6 +153,7 @@ const courses = [
 export default function App() {
   return (
     <Container>
+      <Menu />
       <SafeAreaView>
         <ScrollView>
           <TitleBar>
