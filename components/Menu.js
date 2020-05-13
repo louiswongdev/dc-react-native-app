@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Animated, TouchableOpacity, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import MenuItem from './MenuItem';
+import { useSelector, useDispatch } from 'react-redux';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -12,6 +13,8 @@ const Container = styled.View`
   width: 100%;
   height: 100%;
   z-index: 100;
+  border-radius: 10px;
+  overflow: hidden;
 `;
 
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
@@ -62,18 +65,25 @@ const initialState = {
 };
 
 const Menu = () => {
+  const action = useSelector(state => state.action);
+  const dispatch = useDispatch();
+  const closeMenu = () => dispatch({ type: 'CLOSE_MENU' });
   const [state, setState] = useState(initialState);
 
   useEffect(() => {
-    Animated.spring(state.top, {
-      toValue: 0,
-    }).start();
-  }, []);
+    toggleMenu();
+  }, [action]);
 
   const toggleMenu = () => {
-    Animated.spring(state.top, {
-      toValue: screenHeight,
-    }).start();
+    if (action === 'openMenu') {
+      Animated.spring(state.top, {
+        toValue: 62,
+      }).start();
+    } else if (action === 'closeMenu') {
+      Animated.spring(state.top, {
+        toValue: screenHeight,
+      }).start();
+    }
   };
 
   return (
@@ -84,7 +94,7 @@ const Menu = () => {
         <Subtitle>Designer at Design+Code</Subtitle>
       </Cover>
       <TouchableOpacity
-        onPress={toggleMenu}
+        onPress={closeMenu}
         style={{
           position: 'absolute',
           top: 120,
