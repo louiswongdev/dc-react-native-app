@@ -16,6 +16,7 @@ import { NotificationIcon } from '../components/Icons';
 import Logo from '../components/Logo';
 import Course from '../components/Course';
 import Menu from '../components/Menu';
+import Avatar from '../components/Avatar';
 
 const Container = styled.View`
   flex: 1;
@@ -43,13 +44,6 @@ const TitleBar = styled.View`
   padding-left: 80px;
 `;
 
-const Avatar = styled.Image`
-  width: 44px;
-  height: 44px;
-  background: black;
-  border-radius: 22px;
-`;
-
 const Subtitle = styled.Text`
   color: #b8bece;
   font-weight: 600;
@@ -71,6 +65,7 @@ export default function HomeScreen() {
   const [scale, setScale] = useState(initalAnimation);
   const [opacity, setOpacity] = useState(initialOpacity);
   const action = useSelector(state => state.action);
+  const name = useSelector(state => state.name);
   const dispatch = useDispatch();
   const openMenu = () => dispatch({ type: 'OPEN_MENU' });
 
@@ -118,10 +113,10 @@ export default function HomeScreen() {
                 onPress={openMenu}
                 style={{ position: 'absolute', top: 0, left: 20 }}
               >
-                <Avatar source={require('../assets/avatar.jpg')} />
+                <Avatar />
               </TouchableOpacity>
               <Title>Welcome back, </Title>
-              <Name>Louis</Name>
+              <Name>{name}</Name>
               <NotificationIcon
                 style={{ position: 'absolute', right: 20, top: 5 }}
               />
