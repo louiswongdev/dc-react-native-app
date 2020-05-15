@@ -21,7 +21,8 @@ import Avatar from '../components/Avatar';
 const Container = styled.View`
   flex: 1;
   background-color: #f0f3f5;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 `;
 
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
@@ -61,7 +62,11 @@ const RootView = styled.View`
 const initalAnimation = new Animated.Value(1);
 const initialOpacity = new Animated.Value(1);
 
-export default function HomeScreen() {
+HomeScreen.navigationOptions = {
+  headerShown: false,
+};
+
+export default function HomeScreen(props) {
   const [scale, setScale] = useState(initalAnimation);
   const [opacity, setOpacity] = useState(initialOpacity);
   const action = useSelector(state => state.action);
@@ -142,14 +147,20 @@ export default function HomeScreen() {
               showsHorizontalScrollIndicator={false}
             >
               {cards.map((card, i) => (
-                <Card
+                <TouchableOpacity
                   key={i}
-                  title="Styled Components"
-                  image={card.image}
-                  caption={card.caption}
-                  logo={card.logo}
-                  subtitle={card.subtitle}
-                />
+                  onPress={() => {
+                    props.navigation.push('Section');
+                  }}
+                >
+                  <Card
+                    title="Styled Components"
+                    image={card.image}
+                    caption={card.caption}
+                    logo={card.logo}
+                    subtitle={card.subtitle}
+                  />
+                </TouchableOpacity>
               ))}
             </ScrollView>
             <Subtitle>Popular Courses</Subtitle>
