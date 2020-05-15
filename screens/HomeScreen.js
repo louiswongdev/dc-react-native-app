@@ -150,11 +150,13 @@ export default function HomeScreen(props) {
                 <TouchableOpacity
                   key={i}
                   onPress={() => {
-                    props.navigation.push('Section');
+                    props.navigation.push('Section', {
+                      section: card,
+                    });
                   }}
                 >
                   <Card
-                    title="Styled Components"
+                    title={card.title}
                     image={card.image}
                     caption={card.caption}
                     logo={card.logo}

@@ -30,7 +30,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
   }
 
   return {
-    tabBarVisible,
+    // tabBarVisible,
     tabBarLabel: 'Home',
     tabBarIcon: ({ focused }) => (
       <Ionicons
@@ -72,10 +72,19 @@ ProjectsStack.navigationOptions = {
   ),
 };
 
-const TabNavigator = createBottomTabNavigator({
-  HomeStack,
-  CoursesStack,
-  ProjectsStack,
-});
+const TabNavigator = createBottomTabNavigator(
+  {
+    HomeStack,
+    CoursesStack,
+    ProjectsStack,
+  },
+  {
+    tabBarOptions: {
+      tabStyle: {
+        paddingTop: 8,
+      },
+    },
+  },
+);
 
 export default TabNavigator;
